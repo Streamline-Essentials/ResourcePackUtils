@@ -1,9 +1,12 @@
 package host.plas.configs;
 
-import net.streamline.api.objects.StreamlineResourcePack;
-import net.streamline.thebase.lib.apache.commons.codec.binary.Hex;
 import host.plas.ResourcePackUtils;
+import org.apache.commons.codec.binary.Hex;
+import singularity.objects.CosmicResourcePack;
 import tv.quaint.storage.resources.flat.simple.SimpleConfiguration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Configs extends SimpleConfiguration {
     public Configs() {
@@ -18,7 +21,7 @@ public class Configs extends SimpleConfiguration {
         connectWait();
     }
 
-    public StreamlineResourcePack getResourcePack() {
+    public CosmicResourcePack getResourcePack() {
         reloadResource();
 
         String url = getResource().getOrSetDefault("pack.url", "https://linktopack.com");
@@ -30,14 +33,14 @@ public class Configs extends SimpleConfiguration {
             if (hashString.equals("")) {
                 hash = new byte[0];
             } else {
-                hash = Hex.decodeHex(hashString);
+                hash = Hex.decodeHex(hashString.toCharArray());
             }
         } catch (Exception e) {
             e.printStackTrace();
             hash = new byte[0];
         }
 
-        return new StreamlineResourcePack(url, hash, prompt, force);
+        return new CosmicResourcePack(url, hash, prompt, force);
     }
 
     public boolean isNetworkHandled() {
@@ -50,5 +53,11 @@ public class Configs extends SimpleConfiguration {
         reloadResource();
 
         return getResource().getOrSetDefault("pack.wait", 20);
+    }
+
+    public List<String> getExemptStartsWith() {
+        reloadResource();
+
+        return getOrSetDefault("exempt.name-starts-with", new ArrayList<>(List.of(".")));
     }
 }

@@ -2,23 +2,21 @@ package host.plas.runnables;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.streamline.api.interfaces.IStreamline;
-import net.streamline.api.modules.ModuleUtils;
-import net.streamline.api.objects.StreamlineResourcePack;
-import net.streamline.api.savables.users.StreamlinePlayer;
-import net.streamline.api.scheduler.ModuleRunnable;
+import singularity.data.players.CosmicPlayer;
+import singularity.interfaces.ISingularityExtension;
+import singularity.modules.ModuleUtils;
+import singularity.objects.CosmicResourcePack;
+import singularity.scheduler.ModuleRunnable;
 import host.plas.ResourcePackUtils;
 
+@Setter
 @Getter
 public class PackTicker extends ModuleRunnable {
-    @Setter
-    private StreamlinePlayer player;
-    @Setter
-    private IStreamline.PlatformType type;
-    @Setter
-    private StreamlineResourcePack pack;
+    private CosmicPlayer player;
+    private ISingularityExtension.PlatformType type;
+    private CosmicResourcePack pack;
 
-    public PackTicker(StreamlinePlayer player, IStreamline.PlatformType type, StreamlineResourcePack pack) {
+    public PackTicker(CosmicPlayer player, ISingularityExtension.PlatformType type, CosmicResourcePack pack) {
         super(ResourcePackUtils.getInstance(), 1, ResourcePackUtils.getConfigs().connectWait());
         this.player = player;
         this.type = type;

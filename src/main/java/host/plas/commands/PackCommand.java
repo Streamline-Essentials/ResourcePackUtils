@@ -1,22 +1,20 @@
 package host.plas.commands;
 
 import lombok.Getter;
-import net.streamline.api.command.ModuleCommand;
-import net.streamline.api.configs.given.MainMessagesHandler;
-import net.streamline.api.modules.ModuleUtils;
-import net.streamline.api.savables.users.StreamlinePlayer;
-import net.streamline.api.savables.users.StreamlineUser;
-import net.streamline.api.utils.UserUtils;
+import singularity.command.ModuleCommand;
+import singularity.configs.given.MainMessagesHandler;
+import singularity.data.console.CosmicSender;
+import singularity.data.players.CosmicPlayer;
+import singularity.modules.ModuleUtils;
+import singularity.utils.UserUtils;
 import host.plas.ResourcePackUtils;
 
 import java.util.concurrent.ConcurrentSkipListSet;
 
+@Getter
 public class PackCommand extends ModuleCommand {
-    @Getter
     private final String messageResultPackSent;
-    @Getter
     private final String messageErrorPlayerNotOnline;
-    @Getter
     private final String permissionSend;
 
     public PackCommand() {
@@ -34,7 +32,7 @@ public class PackCommand extends ModuleCommand {
     }
 
     @Override
-    public void run(StreamlineUser sender, String[] args) {
+    public void run(CosmicSender sender, String[] args) {
         if (args.length < 1) {
             ModuleUtils.sendMessage(sender, getWithOther(sender.getUuid(), MainMessagesHandler.MESSAGES.INVALID.ARGUMENTS_TOO_FEW.get()));
             return;
@@ -73,7 +71,7 @@ public class PackCommand extends ModuleCommand {
                 }
 
                 String playerName = args[1];
-                StreamlinePlayer player = UserUtils.getOrGetPlayerByName(playerName);
+                CosmicPlayer player = UserUtils.getOrCreatePlayerByName(playerName).orElse(null);
 
                 if (player == null) {
                     ModuleUtils.sendMessage(sender, MainMessagesHandler.MESSAGES.INVALID.PLAYER_OTHER.get());
@@ -93,7 +91,7 @@ public class PackCommand extends ModuleCommand {
     }
 
     @Override
-    public ConcurrentSkipListSet<String> doTabComplete(StreamlineUser sender, String[] args) {
+    public ConcurrentSkipListSet<String> doTabComplete(CosmicSender sender, String[] args) {
         ConcurrentSkipListSet<String> tabComplete = new ConcurrentSkipListSet<>();
 
         if (args.length == 1) {

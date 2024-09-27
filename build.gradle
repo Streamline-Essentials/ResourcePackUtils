@@ -14,21 +14,19 @@ repositories {
 }
 
 dependencies {
-    // The Base
-    compileOnly 'com.github.server-utilities:TheBase:master-SNAPSHOT'
-    annotationProcessor 'com.github.server-utilities:TheBase:master-SNAPSHOT'
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    // Apache Commons
+    compileOnly 'commons-codec:commons-codec:1.5'
 
     // LuckPerms
     compileOnly 'net.luckperms:api:5.4'
 
     // StreamlineCore
-    compileOnly 'com.github.streamline-essentials.StreamlineCore:StreamlineCore-API:main-SNAPSHOT'
-    annotationProcessor 'com.github.streamline-essentials.StreamlineCore:StreamlineCore-API:main-SNAPSHOT'
-
-    if (properties['include-bapi']) {
-        compileOnly 'com.github.streamline-essentials.StreamlineCore:StreamlineCore-BAPI:main-SNAPSHOT'
-        annotationProcessor 'com.github.streamline-essentials.StreamlineCore:StreamlineCore-BAPI:main-SNAPSHOT'
-    }
+    compileOnly 'com.github.Streamline-Essentials.StreamlineCore:StreamlineCore-API:main-SNAPSHOT'
+    annotationProcessor 'com.github.Streamline-Essentials.StreamlineCore:StreamlineCore-API:main-SNAPSHOT'
 }
 
 java {
@@ -38,14 +36,14 @@ java {
 
 shadowJar {
     manifest {
-        attributes 'Plugin-Class': rootProject.properties['plugin-class']
-        attributes 'Plugin-Id': rootProject.properties['plugin-id']
-        attributes 'Plugin-Version': rootProject.properties['version']
-        attributes 'Plugin-Requires': rootProject.properties['plugin-requires']
-        attributes 'Plugin-Dependencies': rootProject.properties['plugin-dependencies']
-        attributes 'Plugin-Description': rootProject.properties['plugin-description']
-        attributes 'Plugin-Provider': rootProject.properties['plugin-provider']
-        attributes 'Plugin-License': rootProject.properties['plugin-license']
+        attributes 'Plugin-Class': rootProject.properties['pf.class'].toString() + '.' + rootProject.name.toString()
+        attributes 'Plugin-Id': rootProject.properties['pf.id'].toString()
+        attributes 'Plugin-Version': rootProject.version.toString()
+        attributes 'Plugin-Requires': ( rootProject.properties['pf.requires'].toString() == 'none' ? '' : rootProject.properties['pf.requires'].toString() )
+        attributes 'Plugin-Dependencies': ( rootProject.properties['pf.dependencies'].toString() == 'none' ? '' : rootProject.properties['pf.dependencies'].toString() )
+        attributes 'Plugin-Description': rootProject.properties['pf.description'].toString()
+        attributes 'Plugin-Provider': rootProject.properties['pf.provider'].toString()
+        attributes 'Plugin-License': rootProject.properties['pf.license'].toString()
     }
 
     setArchiveFileName(archiveBaseName.get() + '-' + archiveVersion.get() + '.' + archiveExtension.get())

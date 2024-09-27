@@ -19,3 +19,8 @@ pack:
   # it takes to transfer between servers.
   # 20 = 1 second.
   wait: 20
+
+# Players who are exempt from receiving the pack.
+exempt:
+  name-starts-with:
+    - "."

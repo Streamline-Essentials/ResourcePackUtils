@@ -1,12 +1,12 @@
 package host.plas;
 
 import lombok.Getter;
-import net.streamline.api.modules.ModuleUtils;
-import net.streamline.api.modules.SimpleModule;
-import net.streamline.thebase.lib.pf4j.PluginWrapper;
+import singularity.modules.ModuleUtils;
+import singularity.modules.SimpleModule;
 import host.plas.commands.PackCommand;
 import host.plas.configs.Configs;
 import host.plas.listeners.MainListener;
+import org.pf4j.PluginWrapper;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentSkipListSet;
