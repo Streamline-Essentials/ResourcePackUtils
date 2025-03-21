@@ -25,8 +25,8 @@ dependencies {
     compileOnly 'net.luckperms:api:5.4'
 
     // StreamlineCore
-    compileOnly 'com.github.Streamline-Essentials.StreamlineCore:StreamlineCore-API:main-SNAPSHOT'
-    annotationProcessor 'com.github.Streamline-Essentials.StreamlineCore:StreamlineCore-API:main-SNAPSHOT'
+    compileOnly 'com.github.Streamline-Essentials.StreamlineCore:StreamlineCore-API:master-SNAPSHOT'
+    annotationProcessor 'com.github.Streamline-Essentials.StreamlineCore:StreamlineCore-API:master-SNAPSHOT'
 }
 
 java {
